@@ -1,0 +1,90 @@
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+    "name": "maskurnia",
+    "email": "maskurniaadmin@gmail.com",
+    "password": "123456",
+    "confirmPassword": "123456",
+    "role": "admin"
+}
+
+###
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+    "name": "maskurnia",
+    "email": "maskurniauser@gmail.com",
+    "password": "123456",
+    "confirmPassword": "123456",
+    "role": "doctor"
+}
+
+
+###
+// get all users
+GET http://localhost:3000/user
+
+###
+
+// get user by id
+GET http://localhost:3000/user/ba971a85-6d9f-472f-8c1b-ab0ea242017b
+
+###
+
+// update user by id
+PATCH http://localhost:3000/user/9e3a3ead-72d4-4029-9f5e-1e5219f7559f
+Content-Type: application/json
+
+{
+    "name": "Ramadhania1",
+    "email": "ramadhania12@gmail.com",
+    "password": "123456",
+    "confirmPassword": "123456",
+    "role": "doctor"
+}
+
+###
+
+// delete
+DELETE http://localhost:3000/user/01ca1a18-fb06-4741-b12f-6bb393b2a80a
+
+
+###
+# Login
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email": "maskurniaadmin@gmail.com",
+    "password": "123456"
+}
+
+###
+// get me
+GET http://localhost:3000/me
+
+###
+
+// logout
+DELETE http://localhost:3000/logout
+
+
+###
+// all patients
+GET http://localhost:3000/patients
+
+###
+POST http://localhost:3000/patient
+Content-Type: application/json
+
+{
+    "name": "pasien admin 3",
+    "email": "pasien@gmail.com"
+}
+
+###
+
+// single patient
+GET http://localhost:3000/patient/00903c7f-f455-4ecd-8630-40e66da1a784

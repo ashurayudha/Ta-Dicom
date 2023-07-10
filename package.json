@@ -1,0 +1,29 @@
+{
+  "name": "dicom-be-express",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js",
+    "pm2": "npx pm2 start index.js -f"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "argon2": "^0.30.1",
+    "connect-session-sequelize": "^7.1.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
+    "express-session": "^1.17.3",
+    "mysql2": "^2.3.3",
+    "pm2": "^5.2.2",
+    "sequelize": "^6.25.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}

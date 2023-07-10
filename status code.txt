@@ -1,0 +1,32 @@
+validasi
+a. auth login
+- 200, success
+- 404, pengguna tidak ditemukan/tidak terdaftar
+- 400, salah password
+- 500, server error
+
+b. auth get own/detail login user (detail user yg login)
+- 200, success
+- 401, belum login/unauthorized
+- 500, server error
+
+c. auth logout
+- 200, success
+- 400, tidak dapat logout
+- 401, belum login/unauthorized
+- 500, server error
+
+d. user (create)
+- 201, created
+- 401, belum login/unauthorized
+- 500, server error
+- 404, pasien telah dibuat/sudah ada (dari no rekam medis)
+- 403, akses terlarang
+
+e. user (read/view, update, delete)
+- 200, success
+- 401, belum login/unauthorized
+- 500, server error
+- 403, akses terlarang
+
+f. 
