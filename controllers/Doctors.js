@@ -14,7 +14,6 @@ export const getAllDoctor = async (req, res) => {
           "strNumber",
           "birthDate",
           "address",
-          "pasien",
           "specialization",
           "practicePlace",
           "note",
@@ -31,7 +30,6 @@ export const getAllDoctor = async (req, res) => {
               "email",
               "phoneNumber",
               "gender",
-              // "pasien",
               "roleId",
               "createdAt",
               "updatedAt",
@@ -48,7 +46,6 @@ export const getAllDoctor = async (req, res) => {
           "strNumber",
           "birthDate",
           "address",
-          "pasien",
           "specialization",
           "practicePlace",
           "note",
@@ -66,7 +63,6 @@ export const getAllDoctor = async (req, res) => {
               "email",
               "phoneNumber",
               "gender",
-              "pasien",
               "roleId",
               "createdAt",
               "updatedAt",
@@ -88,7 +84,6 @@ export const createDoctor = async (req, res) => {
     strNumber,
     birthDate,
     address,
-    // pasien,
     specialization,
     practicePlace,
     note,
@@ -105,7 +100,7 @@ export const createDoctor = async (req, res) => {
     await Doctors.create({
       userId: userId,
       strNumber: strNumber,
-      //birthDate: birthDate,
+      // birthDate: birthDate,
       address: address,
 
       specialization: specialization,
@@ -200,7 +195,7 @@ export const updateDoctor = async (req, res) => {
         where: {
           id: doctor.id,
         },
-      }
+      },
     );
     res.status(200).json({ msg: "doctor updated" });
   } catch (error) {

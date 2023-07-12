@@ -1,5 +1,6 @@
 import Patients from "../models/PatientModel.js";
 import User from "../models/UserModel.js";
+import Doctors from "../models/DoctorModel.js";
 import path from "path";
 import fs from "fs";
 import { Op } from "sequelize";
@@ -25,6 +26,7 @@ export const getPatients = async (req, res) => {
           "disease",
           "note",
           "userId",
+          "doctorId",
           "createdAt",
           "updatedAt",
         ],
@@ -37,6 +39,28 @@ export const getPatients = async (req, res) => {
           {
             model: Dicoms,
             attributes: ["id", "dicomFile", "createdAt", "updatedAt"],
+          },
+          {
+            model: Doctors,
+            attributes: [
+              "id",
+              "uuid",
+              "userId",
+              "strNumber",
+              "birthDate",
+              "address",
+              "specialization",
+              "practicePlace",
+              "note",
+              "createdAt",
+              "updatedAt",
+            ],
+            include: [
+              {
+                model: User,
+                attributes: ["id", "uuid", "name"],
+              },
+            ],
           },
         ],
       });
@@ -56,6 +80,7 @@ export const getPatients = async (req, res) => {
           "disease",
           "note",
           "userId",
+          "doctorId",
           "createdAt",
           "updatedAt",
         ],
@@ -68,6 +93,28 @@ export const getPatients = async (req, res) => {
           {
             model: Dicoms,
             attributes: ["id", "dicomFile", "createdAt", "updatedAt"],
+          },
+          {
+            model: Doctors,
+            attributes: [
+              "id",
+              "uuid",
+              "userId",
+              "strNumber",
+              "birthDate",
+              "address",
+              "specialization",
+              "practicePlace",
+              "note",
+              "createdAt",
+              "updatedAt",
+            ],
+            include: [
+              {
+                model: User,
+                attributes: ["id", "uuid", "name"],
+              },
+            ],
           },
         ],
       });
@@ -106,6 +153,7 @@ export const getPatientById = async (req, res) => {
           "disease",
           "note",
           "userId",
+          "doctorId",
           "createdAt",
           "updatedAt",
         ],
@@ -121,6 +169,28 @@ export const getPatientById = async (req, res) => {
           {
             model: Dicoms,
             attributes: ["id", "dicomFile", "createdAt", "updatedAt"],
+          },
+          {
+            model: Doctors,
+            attributes: [
+              "id",
+              "uuid",
+              "userId",
+              "strNumber",
+              "birthDate",
+              "address",
+              "specialization",
+              "practicePlace",
+              "note",
+              "createdAt",
+              "updatedAt",
+            ],
+            include: [
+              {
+                model: User,
+                attributes: ["id", "uuid", "name"],
+              },
+            ],
           },
         ],
       });
@@ -140,6 +210,7 @@ export const getPatientById = async (req, res) => {
           "disease",
           "note",
           "userId",
+          "doctorId",
           "createdAt",
           "updatedAt",
         ],
@@ -154,6 +225,28 @@ export const getPatientById = async (req, res) => {
           {
             model: Dicoms,
             attributes: ["id", "dicomFile", "createdAt", "updatedAt"],
+          },
+          {
+            model: Doctors,
+            attributes: [
+              "id",
+              "uuid",
+              "userId",
+              "strNumber",
+              "birthDate",
+              "address",
+              "specialization",
+              "practicePlace",
+              "note",
+              "createdAt",
+              "updatedAt",
+            ],
+            include: [
+              {
+                model: User,
+                attributes: ["id", "uuid", "name"],
+              },
+            ],
           },
         ],
       });
@@ -176,7 +269,7 @@ export const createPatient = async (req, res) => {
   const email = req.body.email;
   const address = req.body.address;
   const disease = req.body.disease;
-  const dokter = req.body.dokter;
+  const doctorId = req.body.doctorId;
   const note = req.body.note;
 
   console.log(medicalRecordNumber);
@@ -186,7 +279,7 @@ export const createPatient = async (req, res) => {
   console.log(email);
   console.log(address);
   console.log(disease);
-  console.log(dokter);
+  console.log(doctorId);
   console.log(note);
   // const dicomFile = req.files.dicomFile;
 
@@ -198,9 +291,6 @@ export const createPatient = async (req, res) => {
 
   // const { name, email } = req.body;
   if (req.files === null) {
-    console.log("====================================");
-    console.log(req.files);
-    console.log("====================================");
     // if (err) return res.status(500).json({ msg: err.message });
     try {
       await Patients.create({
@@ -212,7 +302,7 @@ export const createPatient = async (req, res) => {
         email: email,
         address: address,
         disease: disease,
-        dokter: dokter,
+        doctorId: doctorId,
         note: note,
         userId: req.userId,
       });
@@ -240,14 +330,13 @@ export const createPatient = async (req, res) => {
         await Patients.create({
           name: name,
           medicalRecordNumber: medicalRecordNumber,
-          //birthDate: birthDate,
           gender: gender,
           profileImage: profileImageUrl,
           phoneNumber: phoneNumber,
           email: email,
           address: address,
           disease: disease,
-          dokter: dokter,
+          doctorId: doctorId,
           note: note,
           userId: req.userId,
         });
@@ -277,7 +366,7 @@ export const updatePatient = async (req, res) => {
     const email = req.body.email;
     const address = req.body.address;
     const disease = req.body.disease;
-    const dokter = req.body.dokter;
+    const doctorId = req.body.doctorId;
     const note = req.body.note;
 
     // const { name, email } = req.body;
@@ -306,7 +395,7 @@ export const updatePatient = async (req, res) => {
             email: email,
             address: address,
             disease: disease,
-            dokter: dokter,
+            doctorId: doctorId,
             note: note,
             userId: req.userId,
           },
@@ -314,7 +403,7 @@ export const updatePatient = async (req, res) => {
             where: {
               id: patient.id,
             },
-          }
+          },
         );
       } else {
         if (req.userId !== patient.userId)
@@ -330,7 +419,7 @@ export const updatePatient = async (req, res) => {
             email: email,
             address: address,
             disease: disease,
-            dokter: dokter,
+            doctorId: doctorId,
             note: note,
             userId: req.userId,
           },
@@ -338,7 +427,7 @@ export const updatePatient = async (req, res) => {
             where: {
               [Op.and]: [{ id: patient.id }, { userId: req.userId }],
             },
-          }
+          },
         );
       }
     } else {
@@ -353,7 +442,7 @@ export const updatePatient = async (req, res) => {
             email: email,
             address: address,
             disease: disease,
-            dokter: dokter,
+            doctorId: doctorId,
             note: note,
             userId: req.userId,
           },
@@ -361,7 +450,7 @@ export const updatePatient = async (req, res) => {
             where: {
               id: patient.id,
             },
-          }
+          },
         );
       } else {
         if (req.userId !== patient.userId)
@@ -376,7 +465,7 @@ export const updatePatient = async (req, res) => {
             email: email,
             address: address,
             disease: disease,
-            dokter: dokter,
+            doctorId: doctorId,
             note: note,
             userId: req.userId,
           },
@@ -384,7 +473,7 @@ export const updatePatient = async (req, res) => {
             where: {
               [Op.and]: [{ id: patient.id }, { userId: req.userId }],
             },
-          }
+          },
         );
       }
     }

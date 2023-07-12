@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize";
 import db from "../config/Database.js";
 import Users from "./UserModel.js";
+import Doctors from "./DoctorModel.js";
 
 const { DataTypes } = Sequelize;
 
@@ -93,8 +94,8 @@ const Patients = db.define("patients", {
       notEmpty: true,
     },
   },
-  dokter: {
-    type: DataTypes.STRING,
+  doctorId: {
+    type: DataTypes.INTEGER,
     allowNull: true,
     defaultValue: null,
     validate: {
@@ -121,4 +122,7 @@ const Patients = db.define("patients", {
 
 Users.hasMany(Patients);
 Patients.belongsTo(Users, { foreignKey: "userId" });
+
+Doctors.hasMany(Patients);
+Patients.belongsTo(Doctors, { foreignKey: "doctorId" });
 export default Patients;
